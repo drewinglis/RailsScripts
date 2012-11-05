@@ -16,12 +16,7 @@ def hash_from_string(str)
   end
 end
 
-routes = `rake routes`.split("\n").map {|line|
-  hash_from_string(line.match(/(\{.*\})/)[1])
-    .merge(:not_get => ["POST", "PUT", "DELETE"].inject(nil) { |mem, var|
-        mem ||= line.match(var)
-      })
-}
+routes = `rake routes`.split("\n").map {|line| hash_from_string(line.match(/(\{.*\})/)[1]).merge(:not_get => !line.match("GET")) }
 view_files = `ls -l #{rails_root}app/views/ | awk '{ print "#{rails_root}app/views/" $9 }' | xargs ls`.split("\n\n")
 views = {}
 
