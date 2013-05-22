@@ -1,6 +1,6 @@
 #!/Users/drew/.rvm/rubies/ruby-1.9.3-p125/bin/ruby
 
-if ARGV.length == 0
+if ARGV.length != 1
   puts "USAGE: ./unused_routes.rb /path/to/rails/root"
   exit 0
 end
